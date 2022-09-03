@@ -21,17 +21,17 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Queue queueAttraction = new LinkedList();
+        Queue<Person> queueAttraction = new LinkedList<>();
         for (int i = 0; i < generateClients().size(); i++) {
-            queueAttraction.add(generateClients().get(i));
+            queueAttraction.offer(generateClients().get(i));
 
         }
-        while (queueAttraction.size() != 0) {
-            Person cl = (Person) queueAttraction.poll();
-            System.out.print(cl.name + " ");
-            System.out.println(cl.surname + " прокатился на аттракционе.");
-            cl.tickets = cl.tickets - 1;
-            if (cl.tickets > 0) {
+        while (!queueAttraction.isEmpty()) {
+            Person cl = queueAttraction.poll();
+            System.out.print(cl.getName() + " ");
+            System.out.println(cl.getSurname() + " прокатился на аттракционе.");
+            cl.spendTicket();
+            if (cl.getTickets() > 0) {
                 queueAttraction.add(cl);
             }
 
